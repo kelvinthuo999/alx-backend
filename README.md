@@ -1,0 +1,2 @@
+# Notes
+- Learning backend concepts.
