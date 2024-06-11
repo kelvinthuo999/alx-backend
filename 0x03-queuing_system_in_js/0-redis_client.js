@@ -1,26 +1,29 @@
-// 0-redis_client.js
-
+// Import the Redis client
 import Redis from 'redis';
 
-// function to connect to redis
+// Function to connect to Redis and log the connection status
 async function connectToRedis() {
-	try {
-		const client = Redis.createClient({
-			host: '127.0.0.1',
-			port: 6379,
-		});
+  try {
+    // Attempt to connect to the Redis server
+    const client = Redis.createClient({
+      host: '127.0.0.1',
+      port: 6379,
+    });
 
-		client.on('connect', () => {
-			console.log('Redis client connected to the server');
-		});
+    // Listen for connection events
+    client.on('connect', () => {
+      console.log('Redis client connected to the server');
+    });
 
-		client.on('error', () => {
-			console.log(`Redis client not connected to the server: ${err.message}`);
-		});
-		
-	} catch (error) {
-		console.err('Error:', error);
-	}
+    // Listen for error events
+    client.on('error', (err) => {
+      console.log(`Redis client not connected to the server: ${err.message}`);
+    });
+  } catch (error) {
+    console.error('Error:', error);
+  }
 }
-// call the function
+
+// Call the function to connect to Redis
 connectToRedis();
+
